@@ -1,6 +1,7 @@
 from flask import Flask, request
 from geopy.geocoders import Nominatim
 import datetime
+import os
 
 app = Flask(__name__)
 geolocator = Nominatim(user_agent="location-tracker")
@@ -42,4 +43,11 @@ def save_location():
 @app.route('/')
 def home():
     return "✅ Location Tracking API is Running"
+
+# ===== This part is mandatory for Render =====
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
+    
 
